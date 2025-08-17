@@ -126,6 +126,10 @@ spec:
               name: config
             - mountPath: /etc/synapse/secret
               name: secret
+            {{- if .Values.bridges }}
+            - mountPath: /etc/synapse/bridges
+              name: bridges
+            {{- end }}
             {{- if .Values.postgresql.enabled }}
             - mountPath: /etc/synapse/postgresql-password
               name: postgresql-password
@@ -164,6 +168,11 @@ spec:
         - name: secret
           secret:
             secretName: {{ .Values.secret.name | default (include "matrix.fullname" .) | quote }}
+        {{- if .Values.bridges }}
+        - name: bridges
+          configMap:
+            name: {{ include "matrix.fullname" . }}-bridges
+        {{- end }}
         {{- if .Values.postgresql.enabled }}
         - name: postgresql-password
           secret:

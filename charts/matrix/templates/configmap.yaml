@@ -48,3 +48,9 @@ data:
     report_stats: false
   homeserver.yaml: |
     {{- .Values.homeserverConfig | toYaml | nindent 4 }}
+    {{ if .Values.bridges }}
+    app_service_config_files:
+    {{ range .Values.bridges }}
+      - /etc/synapse/bridges/{{ .name }}.yaml
+    {{ end }}
+    {{ end }}
