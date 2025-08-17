@@ -1,0 +1,14 @@
+{{- if .Values.bridges }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "matrix.fullname" . }}-bridges
+  labels:
+    {{- include "matrix.labels" . | nindent 4 }}
+data:
+{{- range .Values.bridges }}
+  {{ .name }}.yaml: |
+{{ .config | nindent 4 }}
+{{- end }}
+{{- end }}
+

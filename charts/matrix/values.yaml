@@ -71,6 +71,13 @@ extraConfig: []
 #      name: matrix-rooms
 #      key: rooms
 
+# Custom bridge registrations
+bridges: []
+# - name: googlechat
+#   config: |
+#     id: googlechat
+#     url: http://googlechat-bridge:9000
+
 logConfig:
   version: 1
   disable_existing_loggers: false
